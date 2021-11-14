@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img {
+            width: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="tab">
+        <tr>
+            <th>Title</th>
+            <th>level</th>
+            <th>Image</th>
+        </tr>
+    </table>
+</body>
+<script>
+    
+    let table = document.getElementById('tab');
+
+    fetch('https://codingninjas.in/api/v3/courses', {mode: 'cors'})
+    .then(res => res.json())
+    .then(info => {
+        let courses = info.data.courses;
+
+        for (let i = 0; i < courses.length; i++) {
+            let url = courses[i].classroom_icon_url;
+            let title = courses[i].name;
+            let level = courses[i].level;
+            let table_row = document.createElement('tr');
+            table_row.innerHTML = '<td>' + title + '</td>' + '<td>' + level + '</td>' + '<td>' + '<img src="' + url + '" class="img">' + '</td>';
+            table.appendChild(table_row);
+        }
+    })
+
+</script>
+
+</html>
